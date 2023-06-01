@@ -9,7 +9,7 @@ function isAuthenticated(req,res,next){
     // this is a middleware to be put in login && signUp page
     // if user tries to go to the url of login or signUp, take them to the home page.
     if (req.isAuthenticated()) {
-        res.redirect('/');
+        res.redirect('/protected');
     }
     else{
         next();
@@ -36,7 +36,7 @@ router.get('/protected', setCacheControl, ensureAuth, controllers.getProtectedPa
 
 router.get('/signup',isAuthenticated ,controllers.getSignUpPage );
 
-router.post('/login', passport.authenticate('local', {
+router.post('/login',controllers.login , passport.authenticate('local', {
     successRedirect: '/protected',
     failureRedirect:'/login'
 }));

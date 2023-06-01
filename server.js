@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 connect();
+app.use(flash());
 app.use(passport.initialize());
 
 // setting passport session

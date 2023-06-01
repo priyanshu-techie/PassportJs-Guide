@@ -11,6 +11,9 @@
 </head>
 
 <body class="p-5">
+    <% if (locals.messages.errors!==undefined) { %>
+            <div class="alert alert-danger"><%= locals.messages.errors %></div>
+    <% } %>
 
     <h1>Sign in</h1>
 
