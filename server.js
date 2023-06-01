@@ -4,6 +4,7 @@ const passport = require('./config/passport');
 const { connect } = require('./config/database');
 const session = require('express-session');
 const mainRoutes=require('./routes/main')
+const flash=require('express-flash');
 const MongoStore = require('connect-mongo');
 app.set('view engine', 'ejs');
 app.use(express.json());

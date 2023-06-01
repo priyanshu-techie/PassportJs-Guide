@@ -5,7 +5,18 @@ const controllers=require('../controllers/mainControllers');
 
 router.get('/', controllers.getIndex);
 
-router.get('/login',controllers.getLoginPage)
+function isAuthenticated(req,res,next){
+    // this is a middleware to be put in login && signUp page
+    // if user tries to go to the url of login or signUp, take them to the home page.
+    if (req.isAuthenticated()) {
+        res.redirect('/');
+    }
+    else{
+        next();
+    }
+}
+
+router.get('/login',isAuthenticated,controllers.getLoginPage)
 
 function ensureAuth(req, res, next) {
     if (req.isAuthenticated()) {
@@ -23,11 +34,11 @@ function setCacheControl(req, res, next) {
 
 router.get('/protected', setCacheControl, ensureAuth, controllers.getProtectedPage);
 
-router.get('/signup',controllers.getSignUpPage );
+router.get('/signup',isAuthenticated ,controllers.getSignUpPage );
 
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/protected',
-    failureRedirect: '/login'
+    failureRedirect:'/login'
 }));
 
 router.post('/logout', controllers.logout);
