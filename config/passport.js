@@ -41,12 +41,25 @@ passport.use(new LocalStrategy(async function verify(username, password, callbac
     });
   });
   
+  //  "serializeUser" refers to the process of converting a user object into a format that
+  // can be stored in the session. This typically involves extracting a unique identifier 
+  //or key from the user object, such as the user ID, and serializing it into a format that
+  // can be easily stored and retrieved. The serialized user data is then stored in the 
+  // session store, allowing the application to identify the user in subsequent requests.
+
   passport.deserializeUser(function(user, cb) {
     process.nextTick(function() {
       return cb(null, user);
     });
   });
   
+  //"deserializeUser" refers to the process of reconstructing the user object from the
+  // serialized data stored in the session. It involves taking the serialized identifier,
+  // such as the user ID, and using it to retrieve the corresponding user object from a
+  // database or any other data source. Once the user object is reconstructed, it is made
+  // available to the application, typically by attaching it to the request object,
+  // allowing the application to access and utilize the user's information during the 
+  // request handling process.
 
 
   module.exports=passport;

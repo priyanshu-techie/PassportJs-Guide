@@ -14,7 +14,7 @@ connect();
 app.use(flash());
 app.use(passport.initialize());
 
-// setting passport session
+// setting express session
 
 app.use(session({
   secret: 'keyboard cat',
@@ -22,6 +22,7 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create( { mongoUrl:'mongodb://localhost:27017/learningPassport'})
 }));
+// setting passport session
 app.use(passport.authenticate('session'));
 
 //routes
