@@ -9,6 +9,7 @@ module.exports={
         res.render('login');
     },
     getProtectedPage:(req, res) =>{ 
+        console.log(req);
         res.render('protected')
     },
     getSignUpPage:function(req, res, next) {
