@@ -17,6 +17,9 @@ passport.use(new LocalStrategy(async function verify(username, password, callbac
 
       if (isValid) {
         // console.log("user found");
+
+        // if user is valid then we are plugging in the user to the passport middleware, 
+        // this 'user' is then used by the serialsizeUser function to plug user info in the req object
         return callback(null, user);
       }
       else {
@@ -37,6 +40,7 @@ passport.use(new LocalStrategy(async function verify(username, password, callbac
 
   passport.serializeUser(function(user, cb) {
     process.nextTick(function() {
+      // this object is 👇👇 plugged to the req object 
       cb(null, { id: user.id, username: user.username });
     });
   });

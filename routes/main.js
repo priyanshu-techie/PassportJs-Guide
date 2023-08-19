@@ -19,6 +19,7 @@ function isAuthenticated(req,res,next){
 router.get('/login',isAuthenticated,controllers.getLoginPage)
 
 function ensureAuth(req, res, next) {
+    // this isAuthenticated() function is provided by passport
     if (req.isAuthenticated()) {
         return next();
     }
